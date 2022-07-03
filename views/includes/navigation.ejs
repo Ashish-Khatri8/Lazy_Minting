@@ -1,0 +1,81 @@
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <% if (!isAuthenticated) { %>
+                <li class="main-header__item">
+                    <a class="<%= path === '/home' ? 'active' : '' %>" href="/home">Home</a>
+                </li>
+            <% } else { %>
+                
+                <li class="main-header__item">
+                    <a class="<%= path === '/buy' ? 'active' : '' %>" href="/buy">Buy</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/mint' ? 'active' : '' %>" href="/mint">Mint</a>
+                </li>
+                <li class="main-header__item">
+                    <a class="<%= path === '/nfts' ? 'active' : '' %>" href="/nfts">My NFTs</a>
+                </li>
+            <% } %>
+        </ul>
+        <ul class="main-header__item-list second">
+            <% if (!isAuthenticated) { %>
+                <button class="btn fourth" onclick="connectMetamask()">Connect Metamask</button>
+            <% } else { %>
+                <p class="address"><%= address %></p>
+                <button class="btn third" onclick="disconnectMetamask()">Disconnect</button>
+            <% } %>
+        </ul>
+
+        <form id="connected" type="hidden" action="/login" method="POST">
+            <input type="hidden" value="" id="address" name="address">
+        </form>
+        <form id="disconnected" type="hidden" action="/logout" method="POST"></form>
+        <input type="hidden" value="" id="signer" name="signer">
+    </nav>
+</header>
+
+<script
+    src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+    type="application/javascript"
+></script>
+<script>
+    ethereum.on('accountsChanged', handleLogout);
+    ethereum.on('chainChanged', handleLogout);
+    ethereum.on('disconnect', handleLogout);
+
+    async function connectMetamask() {
+        if (!window.ethereum) {
+            return alert("Please Install Metamask");
+        }
+        
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const addresses = await provider.send("eth_requestAccounts", []);
+        const signer = provider.getSigner();
+        console.log(signer);
+        const chainId = await signer.getChainId();
+        if (chainId == 3) {
+            loginFormAutoSubmit(signer, addresses);
+        } else {
+            return alert("Change network to ropsten!");
+        }   
+    }
+
+    async function disconnectMetamask() {
+        handleLogout();
+    }
+
+    async function loginFormAutoSubmit (signer, addresses) {
+      
+        const form = await document.getElementById("connected");
+        const address = await document.getElementById("address");
+        address.value = addresses[0];
+        return form.submit();
+    }
+
+    async function handleLogout() {
+        const form = await document.getElementById("disconnected");
+        return form.submit();
+    }
+
+</script>
