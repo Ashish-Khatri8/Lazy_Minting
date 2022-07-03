@@ -1,0 +1,35 @@
+{
+  "name": "lazy_minting",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashish-Khatri8/Lazy_Minting.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ashish-Khatri8/Lazy_Minting/issues"
+  },
+  "homepage": "https://github.com/Ashish-Khatri8/Lazy_Minting#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  },
+  "dependencies": {
+    "@metamask/detect-provider": "^1.2.0",
+    "body-parser": "^1.20.0",
+    "connect-mongodb-session": "^3.1.1",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "ethers": "^5.6.9",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.4.2",
+    "multer": "^1.4.5-lts.1",
+    "web3.storage": "^4.3.0"
+  }
+}
