@@ -1,0 +1,123 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/nft.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (nfts.length > 0) { %>
+                <div class="grid">
+                    <% for (let nft of nfts) { %>
+                        <article class="card product-item">
+                        <header class="card__header">
+                            <h1 class="product__title">
+                            <%= nft.name %>
+                            </h1>
+                        </header>
+                        <div class="card__image">
+                            <img src="/<%= nft.imageStaticUrl %>" alt="<%= nft.name %>">
+                        </div>
+                        <div class="card__content">
+                            <h2 class="product__price">Eth Price: 
+                                <%= nft.ethPrice %>
+                            </h2>
+                            <h3 class="product__description">-->
+                                <%= nft.description %>
+                            </h3>
+                        </div>
+                        <div class="card__actions">
+                            <a class="a" href="/nfts/<%= nft._id %>">Details</a>
+                            <% if (nft.listedForSale == true) { %>
+                                <h1>Listed for sale</h1>
+                            <% } else if (
+                                nft.isSold == true &&
+                                nft.minter._id.toString() != user._id.toString()
+                                ) { %>
+                                <h1>Bought</h1> 
+                            <% } else if (nft.isSold == true) { %>
+                                <h1>Sold</h1>
+                            
+                            <% } else { %>
+
+                    
+                                <button class="a" 
+                                value='{"name":"<%= nft.name %>", "price":"<%= nft.ethPrice %>", "minter":"<%= user.address %>", "metadata":"<%= nft.metadataUri %>", "id":"<%= nft._id %>"}' 
+                                onclick="sign(this.value)">List For Sale</button>
+                            <% } %>
+                        </div>
+                        </article>
+                        
+                        <% } %>
+                </div>
+
+            <% } else { %>
+                <h1>No NFTs Found!</h1>
+                <% } %>
+
+            <form type="hidden" id="sig" class="product-form" action="/nfts" method="POST">
+                <input type="hidden" value="" name="nftId" id="nftId">
+                <input type="hidden" value="" name="signature" id="signature">
+            </form>
+            
+        </main>
+</body>
+</html>
+<%- include('../includes/end.ejs') %>
+
+
+<script charset="utf-8"
+src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+type="text/javascript">
+</script> 
+
+<script type ="text/javascript">
+
+const SIGNING_DOMAIN_NAME = "LazyMinting"
+const SIGNING_DOMAIN_VERSION = "1"
+
+async function sign(nftValue) {
+
+    const nftData = JSON.parse(nftValue);
+
+    const domain = {
+        name: "LazyMinting",
+        version: "1",
+        verifyingContract: "0xaa08A9Ec8fB427Ab8a8D1EcB6Aa9EC47ba350985",
+        chainId: "3"
+    };
+
+    const types = {
+        NFT: [
+            {name: "name", type: "string"},
+            {name: "price", type: "uint256"},
+            {name: "minter", type: "address"},
+            {name: "metadataURI", type: "string"}
+        ]
+    };
+
+    const nft = {
+        name: nftData.name,
+        price: ethers.utils.parseUnits(nftData.price, 18),
+        minter: nftData.minter,
+        metadataURI: nftData.metadata
+    };
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
+    await provider.send("eth_requestAccounts", []);
+    const signer = provider.getSigner();
+    await signer.getAddress();
+
+    const signature = await signer._signTypedData(domain, types, nft);
+
+    if (signature) {
+        const form = await document.getElementById("sig");
+        const signatureInput = await document.getElementById("signature");
+        const nftIdInput = await document.getElementById("nftId");
+    
+        nftIdInput.value = nftData.id;
+        signatureInput.value = signature;
+        return form.submit();
+    }
+}
+
+</script>
