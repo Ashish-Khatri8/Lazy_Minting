@@ -1,0 +1,27 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/nft.css">
+</head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <div class="grid">
+            <article class="card product-item__single">
+                <header class="card__header">
+                    <h1 class="product__title">
+                    <%= nft.name %>
+                    </h1>
+                </header>
+                <div>
+                    <img class="card__image__detail" src="/<%= nft.imageStaticUrl %>" alt="<%= nft.name %>">
+                </div>
+                <div class="card__content">
+                    <h2 class="product__price">Eth Price: 
+                        <%= nft.ethPrice %>
+                    </h2>
+                    <h3 class="product__description">-->
+                        <%= nft.description %>
+                    </h3>
+                </div>
+            </article>
+        </div>
+        <%- include('../includes/end.ejs') %>
