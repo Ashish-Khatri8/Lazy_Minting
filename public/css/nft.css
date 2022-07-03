@@ -1,0 +1,73 @@
+.product-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+}
+
+.product-item {
+    width: 25rem;
+    max-width: 95%;
+    margin: 1rem;
+    background: gainsboro;
+    border: 5px ridge lightskyblue;
+}
+
+.product-item__single {
+    padding-top: 10px;
+    width: 40rem;
+    max-width: 95%;
+    margin: 1rem;
+    background: gainsboro;
+    border: 5px ridge lightskyblue;
+}
+
+.product__title {
+    font-size: 2.2rem;
+    border: 5px ridge black;
+    text-align: center;
+    color: black;
+    font-style: normal;
+}
+
+.product__price {
+    text-align: center;
+    color: black;
+    padding-bottom: 1.0rem;
+    text-decoration: overline dashed;
+    /* text-decoration: underline; */
+}
+
+.card__image__detail {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10%;
+    width: 35rem;
+    
+}
+
+.product__description {
+    text-align: center;
+    color: black;
+
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    text-decoration: none;
+    font: inherit;
+    border: 1px solid #03e9f4;
+    color: white;
+    background: rgba(0,0,0,.5);
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .btn:hover,
+  .btn:active {
+    background-color: #243b55;
+    color: white;
+  }
