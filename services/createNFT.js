@@ -1,8 +1,7 @@
 import NFT from "../models/nftModel.js";
 
 const createNft = async (name, description, price, imageStaticUrl, imageIpfsUrl, minter, voucher, metadataUri) => {
-    
-    // Creates a new NFT entry in the database.
+   // Creates a new NFT entry in the database.
     const nft = new NFT({
         name: name,
         description: description,
