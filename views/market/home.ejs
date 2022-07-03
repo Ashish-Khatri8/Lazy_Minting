@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/nft.css">
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if (nfts.length > 0) { %>
+                <div class="grid">
+                    <% for (let nft of nfts) { %>
+                        <article class="card product-item">
+                        <header class="card__header">
+                            <h1 class="product__title">
+                            <%= nft.name %>
+                            </h1>
+                        </header>
+                        <div class="card__image">
+                            <img src="/<%= nft.imageStaticUrl %>" alt="<%= nft.name %>">
+                        </div>
+                        <div class="card__content">
+                            <h2 class="product__price">Eth Price: 
+                                <%= nft.ethPrice %>
+                            </h2>
+                            <h3 class="product__description">--> 
+                                <%= nft.description %>
+                            </h3>
+                        </div>
+                        <div class="card__actions">
+                            <a href="/nfts/<%= nft._id %>" class="a">Details</a>
+                        </div>
+                        </article>
+                        <% } %>
+                </div>
+
+                <% } else { %>
+                    <h1>No NFTs Found!</h1>
+                    <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>
+        <script>
+
+        </script>
