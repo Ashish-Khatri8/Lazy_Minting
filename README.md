@@ -2,6 +2,8 @@
 
 - The node.js based backend along with frontend ejs files is uploaded on the [node](https://github.com/Ashish-Khatri8/Lazy_Minting/tree/node) branch.
 
+- And it is deployed on [Heroku](https://lazy-minting-08.herokuapp.com/home)
+
 ## Contract: LazyMinting.sol
 
 - Contract deployed on [ropsten test network](https://ropsten.etherscan.io/address/0xD9cad0DF1038F4EfB5C04852009AC3833c790e78) at:
@@ -9,6 +11,8 @@
 ```script
 0xD9cad0DF1038F4EfB5C04852009AC3833c790e78
 ```
+
+- [Example Transaction](https://ropsten.etherscan.io/tx/0x4b87cc65f49575da1c70276cdb31e5e1d78f9e1c191dbe960232cecd7bf37610)
 
 - This contract deploys an ERC721 token, with lazy minting functionality, meaning it could mint off-chain signed nfts to buyers and send the buy price to the signer.
 
