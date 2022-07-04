@@ -76,6 +76,7 @@ const SIGNING_DOMAIN_NAME = "LazyMinting"
 const SIGNING_DOMAIN_VERSION = "1"
 
 async function sign(nftValue) {
+    
     const nftData = JSON.parse(nftValue);
 
     const domain = {
