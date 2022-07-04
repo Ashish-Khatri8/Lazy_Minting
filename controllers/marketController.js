@@ -1,6 +1,11 @@
 import findAllNfts from "../services/findAllNfts.js";
 
 
+export const getRoot = async (req, res, next) => {
+    res.redirect("/home");
+};
+
+
 export const getHome = async (req, res, next) => {
     // Display all NFTs minted till now on the Home page.
     try {
