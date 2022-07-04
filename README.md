@@ -1,5 +1,7 @@
 # LazyMinting
 
+- The node.js based backend along with frontend ejs files is uploaded on the [node](https://github.com/Ashish-Khatri8/Lazy_Minting/tree/node) branch.
+
 ## Contract: LazyMinting.sol
 
 - Contract deployed on [ropsten test network](https://ropsten.etherscan.io/address/0xD9cad0DF1038F4EfB5C04852009AC3833c790e78) at:
