@@ -1,17 +1,46 @@
-# NodeJS-Wallet-Task
+# Lazy Minting Task
 
-## Requirements: 
+- Deployed on [Heroku](https://lazy-minting-08.herokuapp.com/home)
+
+## Workflow:
+
+- User visits the Home page and clicks on **Connect Metamask** button to login with metamask.
+  - If user is new, then a database entry is created.
+
+- Upon connecting with metamask, user is shown the available nfts to buy on the platform which are lazy minted by other users.
+  - User can click on the **Buy** button to buy the specific NFT.
+  - This calls the contract's **mintNFT()** function with all the required argument values.
+  - After transaction is successful, and **NftSold** event is emitted by the contract, the bought Nft is transferred to buyer's **My NFTs** page.
+
+- User can go to **Mint** page to access the form for lazy minting a new nft off-chain.
+  - It takes name, eth price, description and nft image as input.
+  - If user enters valid inputs, and clicks on **Mint** button, then the NFT Metadata is uploaded on IPFS and the user is redirected to **My NFTs** page.
+  - On the **My NFTs** page, user can click on **List for Sale** button to list the nft.
+  On clicking this button, user is first prompted to sign an **EIP-712** based gasless transaction and this signature is used to verify nft details on-chain.
+
+- User can visit the **My NFTs** page to see all of their own minted and bought nfts.
+
+- User can click on the **Disconnect** button at any time to disconnect their metamask and end the current session.
+
+---
+
+## Requirements:
+
 - Node and npm
 - $npm install (to install dependencies) 
 - Set values of environment variables in .env file.
 - $npm start (to start/ run server)
 
-### Also create a .env file with these details: 
+### Also create a .env file with these details:
+
 - MONGODB_URL="Your MongoDB Cluster URL"
 - PORT="Port on which to run server"
 - WEB3_TOKEN="Your token from web3.storage"
 
-## Routes: 
+
+---
+
+## Routes:
 
 - Pass Authorization header value as: "Bearer JwtToken"
 
